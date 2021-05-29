@@ -15,6 +15,9 @@
 */
 package org.atmosphere.cpr;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Universe contains static reference to Atmosphere's Factories.
  * </p>
@@ -29,16 +32,12 @@ package org.atmosphere.cpr;
  */
 public class Universe {
 
+    private static final Logger logger = LoggerFactory.getLogger(Universe.class);
     private static BroadcasterFactory factory;
-    private static boolean factoryDuplicate = false;
     private static AtmosphereFramework framework;
-    private static boolean frameworkDuplicate = false;
     private static AtmosphereResourceFactory resourceFactory;
-    private static boolean resourceFactoryDuplicate = false;
     private static AtmosphereResourceSessionFactory sessionFactory;
-    private static boolean sessionFactoryDuplicate = false;
     private static DefaultMetaBroadcaster metaBroadcaster;
-    private static boolean metaBroadcasterDuplicate = false;
 
     /**
      * Set the must be unique {@link DefaultMetaBroadcaster}
@@ -47,7 +46,7 @@ public class Universe {
      */
     public static void metaBroadcaster(DefaultMetaBroadcaster a) {
         if (metaBroadcaster != null) {
-            metaBroadcasterDuplicate = true;
+          logger.warn("More than one Universe configured. Universe class will gives wrong object reference {}", a);
         }
         metaBroadcaster = a;
     }
@@ -59,7 +58,7 @@ public class Universe {
      */
     public static void broadcasterFactory(BroadcasterFactory a) {
         if (factory != null) {
-            factoryDuplicate = true;
+          logger.warn("More than one Universe configured. Universe class will gives wrong object reference {}", a);
         }
         factory = a;
     }
@@ -71,7 +70,7 @@ public class Universe {
      */
     public static void framework(AtmosphereFramework a) {
         if (framework != null) {
-            frameworkDuplicate = true;
+          logger.warn("More than one Universe configured. Universe class will gives wrong object reference {}", a);
         }
         framework = a;
     }
@@ -83,7 +82,7 @@ public class Universe {
      */
     public static void resourceFactory(AtmosphereResourceFactory a) {
         if (resourceFactory != null) {
-            resourceFactoryDuplicate = true;
+          logger.warn("More than one Universe configured. Universe class will gives wrong object reference {}", a);
         }
         resourceFactory = a;
     }
@@ -97,7 +96,7 @@ public class Universe {
     public static void sessionResourceFactory(
             AtmosphereResourceSessionFactory a) {
         if (sessionFactory != null) {
-            sessionFactoryDuplicate = true;
+          logger.warn("More than one Universe configured. Universe class will gives wrong object reference {}", a);
         }
         sessionFactory = a;
     }
@@ -108,10 +107,6 @@ public class Universe {
      * @return the {@link org.atmosphere.cpr.BroadcasterFactory}
      */
     public static BroadcasterFactory broadcasterFactory() {
-        if (factoryDuplicate) {
-            throw new IllegalStateException(
-                    "More than one instance has been stored. Universe cannot be used.");
-        }
         return factory;
     }
 
@@ -121,10 +116,6 @@ public class Universe {
      * @return the {@link org.atmosphere.cpr.AtmosphereFramework}
      */
     public static AtmosphereFramework framework() {
-        if (frameworkDuplicate) {
-            throw new IllegalStateException(
-                    "More than one instance has been stored. Universe cannot be used.");
-        }
         return framework;
     }
 
@@ -134,10 +125,6 @@ public class Universe {
      * @return the {@link AtmosphereResourceFactory}
      */
     public static AtmosphereResourceFactory resourceFactory() {
-        if (resourceFactoryDuplicate) {
-            throw new IllegalStateException(
-                    "More than one instance has been stored. Universe cannot be used.");
-        }
         return resourceFactory;
     }
 
@@ -147,10 +134,6 @@ public class Universe {
      * Throw exception if Universe methods are used when they are not reliable:modules/runtime/src/main/java/org/atmosphere/runtime/Universe.java
      */
     public static AtmosphereResourceSessionFactory sessionFactory() {
-        if (sessionFactoryDuplicate) {
-            throw new IllegalStateException(
-                    "More than one instance has been stored. Universe cannot be used.");
-        }
         return sessionFactory;
     }
 
@@ -160,10 +143,6 @@ public class Universe {
      * @return the {@link DefaultMetaBroadcaster}
      */
     public static DefaultMetaBroadcaster metaBroadcaster() {
-        if (metaBroadcasterDuplicate) {
-            throw new IllegalStateException(
-                    "More than one instance has been stored. Universe cannot be used.");
-        }
         return metaBroadcaster;
     }
 }
