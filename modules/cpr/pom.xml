@@ -49,6 +49,7 @@
                             org.mortbay.util.ajax*;resolution:=optional,
                             org.atmosphere.inject*;resolution:=optional,
                             org.atmosphere.jboss*;resolution:=optional,
+                            org.atmosphere.jersey*;resolution:=optional,
                             org.apache.shiro*;resolution:=optional,
                             org.jboss.vfs*;resolution:=optional,
                             javax.servlet*;version="${servlet-version-range}",
