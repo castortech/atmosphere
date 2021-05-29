@@ -56,6 +56,9 @@
                             javax.enterprise*;resolution:=optional,
                             javax.inject*;resolution:=optional,
                             weblogic.websocket*;resolution:=optional,
+                            org.testng*;resolution:=optional,
+                            io.quarkus*;resolution:=optional,
+                            javax.jnlp*;resolution:=optional,
                             *,
                         </Import-Package>
                         <Export-Package>
